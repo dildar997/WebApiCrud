@@ -12,14 +12,14 @@ using WebApiApplicationCrud.ViewModels;
 
 namespace WebApiApplicationCrud.Controllers
 {
-    public class StateController : ApiController
+    public class CityController : ApiController
     {
-        IStateRepository stateRepository;
+        ICityRepository cityRepository;
         IMapper mapper;
 
-        public StateController(IStateRepository _stateRepository, IMapper _mapper)
+        public CityController(ICityRepository _cityRepository, IMapper _mapper)
         {
-            this.stateRepository = _stateRepository;
+            this.cityRepository = _cityRepository;
             this.mapper = _mapper;
         }
 
@@ -29,8 +29,8 @@ namespace WebApiApplicationCrud.Controllers
         {
             try
             {
-                var result = await stateRepository.GetAllAsync();
-                var mappedresult = mapper.Map<IEnumerable<StateVM>>(result);
+                var result = await cityRepository.GetAllAsync();
+                var mappedresult = mapper.Map<IEnumerable<CityVM>>(result);
                 if (mappedresult == null) return Content(HttpStatusCode.NotFound, "Records does not exits");
                 return Ok(mappedresult);
             }
@@ -48,8 +48,8 @@ namespace WebApiApplicationCrud.Controllers
             try
             {
                 if (string.IsNullOrWhiteSpace(id.ToString())) return BadRequest("id can not be null");
-                var result = await stateRepository.GetAsync(id);
-                var mappedresult = mapper.Map<StateVM>(result);
+                var result = await cityRepository.GetAsync(id);
+                var mappedresult = mapper.Map<CityVM>(result);
                 if (mappedresult == null) return Content(HttpStatusCode.NotFound, "Record does not exits");
                 return Ok(mappedresult);
             }
@@ -63,14 +63,14 @@ namespace WebApiApplicationCrud.Controllers
         // POST: api/Default
 
         [HttpPost]
-        public async Task<IHttpActionResult> Post([FromBody] StateVM model)
+        public async Task<IHttpActionResult> Post([FromBody] CityVM model)
         {
             try
             {
                 if (model != null && ModelState.IsValid)
                 {
-                    var mappedModel = mapper.Map<State>(model);
-                    if (await stateRepository.AddAsync(mappedModel)) return Content(HttpStatusCode.Created, "Added Successfully");
+                    var mappedModel = mapper.Map<City>(model);
+                    if (await cityRepository.AddAsync(mappedModel)) return Content(HttpStatusCode.Created, "Added Successfully");
                 }
                 return Content(HttpStatusCode.BadRequest, ModelState);
             }
@@ -83,18 +83,18 @@ namespace WebApiApplicationCrud.Controllers
         }
 
         [HttpPut]
-        public async Task<IHttpActionResult> Put(int id, [FromBody] StateVM model)
+        public async Task<IHttpActionResult> Put(int id, [FromBody] CityVM model)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(id.ToString())) return BadRequest("Id can not be null");
                 if (ModelState.IsValid)
                 {
-                    var existingModel = await stateRepository.GetAsync(id);
+                    var existingModel = await cityRepository.GetAsync(id);
                     if (existingModel != null)
                     {
-                        var updatedMappedModel = mapper.Map<State>(model);
-                        if (await stateRepository.UpdateAsync(existingModel, updatedMappedModel)) return Content(HttpStatusCode.OK, "Updated Successfully");
+                        var updatedMappedModel = mapper.Map<City>(model);
+                        if (await cityRepository.UpdateAsync(existingModel, updatedMappedModel)) return Content(HttpStatusCode.OK, "Updated Successfully");
                     }
                     else
                     {
@@ -118,10 +118,10 @@ namespace WebApiApplicationCrud.Controllers
             try
             {
                 if (string.IsNullOrWhiteSpace(id.ToString())) return BadRequest("Id can not be null");
-                var model = await stateRepository.GetAsync(id);
+                var model = await cityRepository.GetAsync(id);
                 if (model != null)
                 {
-                    if (await stateRepository.RemoveAsync(model)) return Content(HttpStatusCode.OK, "Deleted Successfully");
+                    if (await cityRepository.RemoveAsync(model)) return Content(HttpStatusCode.OK, "Deleted Successfully");
                 }
                 else
                 {
