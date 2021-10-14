@@ -197,6 +197,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DatabaseContext\DefaultDBContext.cs" />
     <Compile Include="Global.asax.cs">
