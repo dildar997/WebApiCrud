@@ -208,6 +208,12 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceRepositories\CityRepository.cs" />
+    <Compile Include="ServiceRepositories\CountryRepository.cs" />
+    <Compile Include="ServiceRepositories\ICityRepository.cs" />
+    <Compile Include="ServiceRepositories\ICountryRepository.cs" />
+    <Compile Include="ServiceRepositories\IStateRepository.cs" />
+    <Compile Include="ServiceRepositories\StateRepository.cs" />
     <Compile Include="ViewModels\CityVM.cs" />
     <Compile Include="ViewModels\CountryVM.cs" />
     <Compile Include="ViewModels\StateVM.cs" />
